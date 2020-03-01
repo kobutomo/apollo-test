@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string,
@@ -24,6 +25,17 @@ export type Book = {
 export type Query = {
    __typename?: 'Query',
   books?: Maybe<Array<Maybe<Book>>>,
+  book?: Maybe<Book>,
+};
+
+
+/** 
+ * The "Query" type is special: it lists all of the available queries that
+ * clients can execute, along with the return type for each. In this
+ * case, the "books" query returns an array of zero or more Books (defined above).
+ */
+export type QueryBookArgs = {
+  title: Scalars['String']
 };
 
 
@@ -121,6 +133,7 @@ export type BookResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>,
+  book?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType, RequireFields<QueryBookArgs, 'title'>>,
 };
 
 export type Resolvers<ContextType = any> = {

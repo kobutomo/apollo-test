@@ -1,15 +1,15 @@
 overwrite: true
 schema:
-  - ./apollo-server-test/schema.graphql
+  - ./server/schema.graphql
 documents:
-  - ./apollo-server-test/queries/*.graphql
+  - ./server/queries/*.graphql
   # - ./graphql/mutations/*.graphql
 generates:
-  ./apollo-server-test/gen/graphql-resolver-types.ts:
+  ./server/gen/graphql-resolver-types.ts:
     plugins:
       - typescript
       - typescript-resolvers
-  ./apollo-client-test/gen/graphql-client-api.tsx:
+  ./client/gen/graphql-client-api.tsx:
     plugins:
       - typescript
       - typescript-operations
@@ -18,6 +18,6 @@ generates:
       withComponent: false
       withHooks: true
       withHOC: false
-  ./graphql/schema.json:
+  ./server/schema.json:
     plugins:
       - introspection
