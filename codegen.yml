@@ -1,0 +1,23 @@
+overwrite: true
+schema:
+  - ./apollo-server-test/schema.graphql
+documents:
+  - ./apollo-server-test/queries/*.graphql
+  # - ./graphql/mutations/*.graphql
+generates:
+  ./apollo-server-test/gen/graphql-resolver-types.ts:
+    plugins:
+      - typescript
+      - typescript-resolvers
+  ./apollo-client-test/gen/graphql-client-api.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      withComponent: false
+      withHooks: true
+      withHOC: false
+  ./graphql/schema.json:
+    plugins:
+      - introspection

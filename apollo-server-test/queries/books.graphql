@@ -1,0 +1,6 @@
+query users {
+  books {
+    title
+    author
+  }
+}
