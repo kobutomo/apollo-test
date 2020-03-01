@@ -6,9 +6,12 @@ documents:
   # - ./graphql/mutations/*.graphql
 generates:
   ./server/gen/graphql-resolver-types.ts:
+    config:
+      useIndexSignature: true
     plugins:
       - typescript
       - typescript-resolvers
+
   ./client/gen/graphql-client-api.tsx:
     plugins:
       - typescript
@@ -18,6 +21,7 @@ generates:
       withComponent: false
       withHooks: true
       withHOC: false
+      
   ./server/schema.json:
     plugins:
       - introspection
